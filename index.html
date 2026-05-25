@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Australian Sports Culture | Participation · Attendance · Funding</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #F8F9FA; color: #1A1A2E; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.02em; }
+        h1 { font-size: 3.5rem; font-weight: 700; background: linear-gradient(135deg, #1A1A2E 0%, #E74C3C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
+        h2 { font-size: 2rem; margin-bottom: 1rem; color: #1A1A2E; border-left: 5px solid #E74C3C; padding-left: 1rem; }
+        h3 { font-size: 1.3rem; margin-bottom: 0.75rem; color: #2C3E50; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .hero { text-align: center; padding: 3rem 1rem 2rem 1rem; background: linear-gradient(135deg, #F8F9FA 0%, #FFF 100%); border-bottom: 1px solid #E0E0E0; }
+        .hero p { font-size: 1.2rem; color: #5A6B7A; max-width: 700px; margin: 0 auto; }
+        .section { margin-bottom: 4rem; padding: 2rem 0; border-bottom: 1px solid #E8ECEF; }
+        .section:last-child { border-bottom: none; }
+        .insight-box { background: linear-gradient(135deg, #FFF5F0 0%, #FFF 100%); border-left: 4px solid #E74C3C; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 12px 12px 0; }
+        .insight-box p { margin: 0; font-size: 0.95rem; color: #5A3A2E; }
+        .insight-box i { color: #E74C3C; margin-right: 0.5rem; }
+        .viz-card { background: white; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+        .viz-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+        .viz-container { min-height: 400px; width: 100%; }
+        .viz-caption { font-size: 0.85rem; color: #7F8C8D; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #ECF0F1; }
+        .viz-caption i { margin-right: 0.25rem; }
+        .footer { background: #1A1A2E; color: #BDC3C7; padding: 3rem 2rem; margin-top: 3rem; border-radius: 16px 16px 0 0; }
+        .footer a { color: #E74C3C; text-decoration: none; }
+        @media (max-width: 768px) { .container { padding: 1rem; } h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } }
+        hr { margin: 2rem 0; border: none; height: 1px; background: linear-gradient(90deg, transparent, #E0E0E0, transparent); }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="container">
+        <h1>🏏 Australian Sports Culture</h1>
+        <p>Who plays? Who watches? Is the money well spent?<br>
+        Exploring participation, attendance trends, and funding efficiency in Australian sports</p>
+        <div style="margin-top: 1.5rem;">
+            <span style="background: #E74C3C; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;"><i class="fas fa-chart-line"></i> 11 Interactive Visualisations</span>
+            <span style="background: #3498DB; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; margin-left: 0.5rem;"><i class="fas fa-map"></i> 1 Geographic Map</span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- ACT 1 -->
+    <div class="section">
+        <h2>🎯 Act 1: Who Participates? Age × Gender × Sport</h2>
+        <p style="margin-bottom: 1.5rem; color: #5A6B7A;">Young people prefer AFL and Soccer. Netball is female-dominated. Participation declines with age.</p>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="viz-card">
+                    <h3>🔥 Male Participation Heatmap</h3>
+                    <div id="heatmap-male" class="viz-container"></div>
+                    <div class="viz-caption"><i class="fas fa-chart-heatmap"></i> Darker colours indicate higher participation rates. AFL and Soccer have highest rates among young males.</div>
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="viz-card">
+                    <h3>💙 Female Participation Heatmap</h3>
+                    <div id="heatmap-female" class="viz-container"></div>
+                    <div class="viz-caption"><i class="fas fa-chart-heatmap"></i> Netball has the highest female participation, reaching 79% among girls aged 5-14.</div>
+                </div>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-1">
+                <div class="viz-card">
+                    <h3>📊 AFL Gender Comparison: Participation Declines with Age</h3>
+                    <div id="grouped-bar" class="viz-container"></div>
+                    <div class="insight-box"><i class="fas fa-lightbulb"></i> <strong>Insight</strong>: For both genders, AFL participation peaks at ages 5-14, then declines sharply. Male participation consistently exceeds female.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ACT 2 -->
+    <div class="section">
+        <h2>🗺️ Act 2: State Sport Culture Map</h2>
+        <p style="margin-bottom: 1.5rem; color: #5A6B7A;">Victoria is the heart of AFL. Queensland and NSW are Rugby League territory.</p>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-2-3">
+                <div class="viz-card">
+                    <h3>🇦🇺 Dominant Sport by State - Geographic Map</h3>
+                    <div id="choropleth-map" class="viz-container"></div>
+                    <div class="viz-caption"><i class="fas fa-map-marker-alt"></i> Hover over each state to see the dominant sport and number of participants.</div>
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-3">
+                <div class="viz-card">
+                    <h3>📊 State Sport Popularity Share</h3>
+                    <div id="stacked-bar" class="viz-container" style="min-height: 450px;"></div>
+                    <div class="insight-box"><i class="fas fa-chart-pie"></i> In Victoria, AFL accounts for 38% of participation share. In Queensland, Rugby League accounts for 36%.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ACT 3 -->
+    <div class="section">
+        <h2>📈 Act 3: Have Spectators Returned? COVID-19 Impact & Recovery</h2>
+        <p style="margin-bottom: 1.5rem; color: #5A6B7A;">Attendance dropped sharply in 2020 due to the pandemic, but 2025 figures have surpassed 2019 levels.</p>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-3-5">
+                <div class="viz-card">
+                    <h3>🎭 Attendance Trends (2019-2025)</h3>
+                    <div id="streamgraph" class="viz-container"></div>
+                    <div class="viz-caption"><i class="fas fa-chart-line"></i> AFL draws the largest audiences, reaching 8.96 million in 2025.</div>
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-2-5">
+                <div class="viz-card">
+                    <h3>🏟️ Major Venue Utilisation</h3>
+                    <div id="lollipop" class="viz-container"></div>
+                    <div class="insight-box"><i class="fas fa-chart-simple"></i> MCG operates at 82% capacity, attracting 3.2 million annual spectators.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ACT 4 -->
+    <div class="section">
+        <h2>💰 Act 4: Funding Investment vs Medal Output</h2>
+        <p style="margin-bottom: 1.5rem; color: #5A6B7A;">Swimming and Cycling show strong returns on investment. Basketball requires more funding.</p>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="viz-card">
+                    <h3>📉 Funding vs Medals: Slope Chart (2019 → 2025)</h3>
+                    <div id="slope-chart" class="viz-container"></div>
+                    <div class="viz-caption"><i class="fas fa-arrow-trend-up"></i> Left axis: Funding (AUD million) | Right axis: Medal count.</div>
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="viz-card">
+                    <h3>🫧 Funding × Medals: Bubble Chart (2025)</h3>
+                    <div id="bubble-chart" class="viz-container"></div>
+                    <div class="insight-box"><i class="fas fa-chart-scatter"></i> Swimming receives the most funding ($58M) with 22 medals.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ACT 5 -->
+    <div class="section">
+        <h2>🌟 Act 5: Pathways to Participation & Conversion Funnel</h2>
+        <p style="margin-bottom: 1.5rem; color: #5A6B7A;">Only 9% convert from awareness to membership — schools are the key entry point.</p>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-3">
+                <div class="viz-card">
+                    <h3>📉 Fan Conversion Funnel</h3>
+                    <div id="funnel" class="viz-container"></div>
+                    <div class="insight-box"><i class="fas fa-funnel-dollar"></i> Only 9% conversion rate from awareness to membership.</div>
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-2-3">
+                <div class="viz-card">
+                    <h3>🔄 Participation Pathways: Entry to Outcome</h3>
+                    <div id="alluvial" class="viz-container"></div>
+                    <div class="viz-caption"><i class="fas fa-code-branch"></i> School sport is the primary entry for AFL and Netball.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Key Findings -->
+    <div class="section">
+        <h2>📋 Key Findings & Recommendations</h2>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-3"><div class="viz-card" style="background: #FFF5F0;"><i class="fas fa-child" style="font-size: 2rem; color: #E74C3C;"></i><h3>Youth Participation is Critical</h3><p>Peak participation occurs at ages 5-14. Invest in school sports programs.</p></div></div>
+            <div class="pure-u-1 pure-u-md-1-3"><div class="viz-card" style="background: #F0F5FF;"><i class="fas fa-venus-mars" style="font-size: 2rem; color: #3498DB;"></i><h3>Significant Gender Gaps</h3><p>Increase female participation in AFL and Soccer through targeted programs.</p></div></div>
+            <div class="pure-u-1 pure-u-md-1-3"><div class="viz-card" style="background: #F0FFF4;"><i class="fas fa-dollar-sign" style="font-size: 2rem; color: #27AE60;"></i><h3>Optimise Funding Efficiency</h3><p>Basketball and Tennis show lower ROI. Review funding allocation.</p></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2"><h3 style="color: white; border-left: none; padding-left: 0;">🏏 Australian Sports Culture</h3><p>A data story created for FIT2179 Data Visualisation 2.</p></div>
+            <div class="pure-u-1 pure-u-md-1-2"><h4 style="color: white;">📊 Data Sources</h4><ul style="list-style: none;"><li>• Australian Sports Commission - AusPlay Survey</li><li>• Australian Bureau of Statistics</li><li>• AFL / Cricket Australia Annual Reports</li></ul></div>
+        </div>
+        <hr style="margin: 2rem 0; background: #2C3E50;">
+        <div class="pure-g" style="font-size: 0.85rem;"><div class="pure-u-1 pure-u-md-1-2"><i class="far fa-copyright"></i> 2026 Author: FIT2179 Monash University</div><div class="pure-u-1 pure-u-md-1-2" style="text-align: right;"><i class="fas fa-robot"></i> AI Acknowledgement: GitHub Copilot and ChatGPT used for code scaffolding.</div></div>
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // DATA URLS - Update with your GitHub raw URLs
+    // ============================================
+    const DATA_BASE = 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/data/';
+    
+    // ============================================
+    // VEGA-LITE SPECIFICATIONS
+    // ============================================
+    
+    // 1. Male Participation Heatmap
+    const heatmapMale = {
+        title: "Male Participation Rate (%)",
+        width: "container",
+        height: 350,
+        data: { url: DATA_BASE + "age_gender_sport_matrix.csv" },
+        transform: [{ filter: "datum.gender == 'Male'" }],
+        mark: "rect",
+        encoding: {
+            x: { field: "age_group", type: "ordinal", title: "Age Group", sort: ["5-14", "15-24", "25-34", "35-44", "45-54", "55+"] },
+            y: { field: "sport", type: "nominal", title: "Sport", sort: ["AFL", "Cricket", "Soccer", "Basketball", "Tennis", "Netball", "Rugby League"] },
+            color: { field: "participation_index", type: "quantitative", title: "Rate (%)", scale: { scheme: "reds", domain: [0, 90] } },
+            tooltip: [
+                { field: "sport", title: "Sport" },
+                { field: "age_group", title: "Age Group" },
+                { field: "participation_index", title: "Rate (%)", format: ".1f" }
+            ]
+        },
+        config: { axis: { labelAngle: -45 }, view: { stroke: null } }
+    };
+    
+    // 2. Female Participation Heatmap
+    const heatmapFemale = {
+        title: "Female Participation Rate (%)",
+        width: "container",
+        height: 350,
+        data: { url: DATA_BASE + "age_gender_sport_matrix.csv" },
+        transform: [{ filter: "datum.gender == 'Female'" }],
+        mark: "rect",
+        encoding: {
+            x: { field: "age_group", type: "ordinal", title: "Age Group", sort: ["5-14", "15-24", "25-34", "35-44", "45-54", "55+"] },
+            y: { field: "sport", type: "nominal", title: "Sport" },
+            color: { field: "participation_index", type: "quantitative", title: "Rate (%)", scale: { scheme: "blues", domain: [0, 90] } },
+            tooltip: [
+                { field: "sport", title: "Sport" },
+                { field: "age_group", title: "Age Group" },
+                { field: "participation_index", title: "Rate (%)", format: ".1f" }
+            ]
+        },
+        config: { axis: { labelAngle: -45 }, view: { stroke: null } }
+    };
+    
+    // 3. AFL Grouped Bar Chart
+    const groupedBar = {
+        title: "AFL Participation by Age Group and Gender",
+        width: "container",
+        height: 400,
+        data: { url: DATA_BASE + "age_gender_sport_matrix.csv" },
+        transform: [{ filter: "datum.sport == 'AFL'" }],
+        mark: "bar",
+        encoding: {
+            x: { field: "age_group", type: "ordinal", title: "Age Group", sort: ["5-14", "15-24", "25-34", "35-44", "45-54", "55+"] },
+            y: { field: "participation_index", type: "quantitative", title: "Participation Rate (%)", scale: { domain: [0, 90] } },
+            color: { field: "gender", type: "nominal", title: "Gender", scale: { domain: ["Male", "Female"], range: ["#3498DB", "#E74C3C"] } },
+            tooltip: [
+                { field: "age_group", title: "Age Group" },
+                { field: "gender", title: "Gender" },
+                { field: "participation_index", title: "Rate (%)", format: ".1f" }
+            ]
+        }
+    };
+    
+    // 4. Choropleth Map - Using external GeoJSON
+    const choroplethMap = {
+        title: "Dominant Sport by State",
+        width: "container",
+        height: 450,
+        projection: { type: "mercator", center: [133, -25], scale: 350 },
+        data: {
+            url: "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
+            format: { type: "topojson", feature: "states" }
+        },
+        transform: [
+            {
+                lookup: "properties.STATE_NAME",
+                from: {
+                    data: { url: DATA_BASE + "dominant_sport_by_state.csv" },
+                    key: "state",
+                    fields: ["sport", "participants"]
+                }
+            }
+        ],
+        mark: { type: "geoshape", stroke: "white", strokeWidth: 1.5 },
+        encoding: {
+            color: {
+                field: "sport",
+                type: "nominal",
+                title: "Dominant Sport",
+                scale: { domain: ["AFL", "Rugby League", "Rugby Union"], range: ["#D32F2F", "#388E3C", "#1976D2"] }
+            },
+            tooltip: [
+                { field: "properties.STATE_NAME", type: "nominal", title: "State" },
+                { field: "sport", type: "nominal", title: "Dominant Sport" },
+                { field: "participants", type: "quantitative", title: "Participants", format: ",.0f" }
+            ]
+        }
+    };
+    
+    // 5. Stacked Bar Chart - State Sport Popularity
+    const stackedBar = {
+        title: "Sport Popularity Share by State",
+        width: "container",
+        height: 450,
+        data: { url: DATA_BASE + "state_sport_popularity.csv" },
+        mark: "bar",
+        encoding: {
+            y: { field: "state", type: "nominal", title: "State", sort: "-x" },
+            x: { field: "share_percent", type: "quantitative", title: "Share (%)", stack: "normalize", axis: { format: ".0%" } },
+            color: { field: "sport", type: "nominal", title: "Sport" },
+            tooltip: [
+                { field: "state", title: "State" },
+                { field: "sport", title: "Sport" },
+                { field: "share_percent", title: "Share (%)", format: ".1f" }
+            ]
+        }
+    };
+    
+    // 6. Streamgraph - Attendance Trends
+    const streamgraph = {
+        title: "Attendance Trends by Sport (2019-2025)",
+        width: "container",
+        height: 400,
+        data: { url: DATA_BASE + "attendance_streamgraph.csv" },
+        mark: "area",
+        encoding: {
+            x: { field: "year", type: "temporal", title: "Year", axis: { format: "d" } },
+            y: { field: "attendance_millions", type: "quantitative", title: "Attendance (Millions)", stack: "zero" },
+            color: { field: "sport", type: "nominal", title: "Sport" },
+            tooltip: [
+                { field: "sport", title: "Sport" },
+                { field: "year", title: "Year" },
+                { field: "attendance_millions", title: "Attendance (M)", format: ".2f" }
+            ]
+        }
+    };
+    
+    // 7. Lollipop Chart - Venue Utilisation
+    const lollipop = {
+        title: "Venue Capacity Utilisation",
+        width: "container",
+        height: 400,
+        data: { url: DATA_BASE + "venue_capacity_utilisation.csv" },
+        mark: { type: "point", filled: true, size: 120 },
+        encoding: {
+            y: { field: "venue", type: "nominal", title: "Venue", sort: "-utilisation" },
+            x: { field: "utilisation", type: "quantitative", title: "Utilisation Rate (%)", scale: { domain: [0, 100] } },
+            color: { value: "#1976D2" },
+            size: { field: "capacity", type: "quantitative", title: "Capacity (thousands)" },
+            tooltip: [
+                { field: "venue", title: "Venue" },
+                { field: "utilisation", title: "Utilisation (%)", format: ".1f" },
+                { field: "capacity", title: "Capacity (k)" },
+                { field: "attendance", title: "Attendance (M)", format: ".2f" }
+            ]
+        }
+    };
+    
+    // 8. Slope Chart - Funding vs Medals
+    const slopeChart = {
+        title: "Funding vs Medals (2019 → 2025)",
+        width: "container",
+        height: 400,
+        data: { url: DATA_BASE + "funding_vs_medals.csv" },
+        transform: [{ fold: ["funding_million_aud", "major_event_medals"], as: ["metric", "value"] }],
+        mark: { type: "line", point: true, strokeWidth: 2 },
+        encoding: {
+            x: { field: "year", type: "ordinal", title: "Year" },
+            y: { field: "value", type: "quantitative", title: "Value" },
+            color: { field: "sport", type: "nominal", title: "Sport" },
+            facet: { field: "metric", type: "nominal", title: "", columns: 2 },
+            tooltip: [{ field: "sport" }, { field: "year" }, { field: "value", format: ".1f" }]
+        },
+        resolve: { scale: { y: "independent" } }
+    };
+    
+    // 9. Bubble Chart - 2025 Funding vs Medals
+    const bubbleChart = {
+        title: "2025: Funding vs Medals",
+        width: "container",
+        height: 400,
+        data: { url: DATA_BASE + "funding_vs_medals.csv" },
+        transform: [{ filter: "datum.year == 2025" }],
+        mark: "circle",
+        encoding: {
+            x: { field: "funding_million_aud", type: "quantitative", title: "Funding (AUD Million)" },
+            y: { field: "major_event_medals", type: "quantitative", title: "Medal Count" },
+            size: { field: "funding_million_aud", type: "quantitative", legend: null },
+            color: { field: "sport", type: "nominal", title: "Sport" },
+            tooltip: [
+                { field: "sport" },
+                { field: "funding_million_aud", title: "Funding (M)", format: ".1f" },
+                { field: "major_event_medals", title: "Medals" }
+            ]
+        }
+    };
+    
+    // 10. Funnel Chart
+    const funnel = {
+        title: "Fan Conversion Funnel",
+        width: "container",
+        height: 350,
+        data: { url: DATA_BASE + "sports_fan_funnel.csv" },
+        mark: "bar",
+        encoding: {
+            y: { field: "stage", type: "nominal", title: "Stage", sort: { field: "percent", order: "descending" } },
+            x: { field: "percent", type: "quantitative", title: "Percentage of Audience (%)", scale: { domain: [0, 100] } },
+            color: { condition: { test: "datum.stage == 'Membership'", value: "#D32F2F" }, value: "#1976D2" },
+            tooltip: [
+                { field: "stage", title: "Stage" },
+                { field: "description", title: "Description" },
+                { field: "percent", title: "Percentage (%)", format: ".1f" }
+            ]
+        }
+    };
+    
+    // 11. Participation Pathways Chart
+    const alluvial = {
+        title: "Participation Pathways",
+        width: "container",
+        height: 400,
+        data: { url: DATA_BASE + "participation_pathways.csv" },
+        mark: "bar",
+        encoding: {
+            x: { field: "entry_point", type: "nominal", title: "Entry Point", axis: { labelAngle: -20 } },
+            y: { field: "percent", type: "quantitative", title: "Percentage (%)" },
+            color: { field: "outcome", type: "nominal", title: "Outcome" },
+            column: { field: "sport", type: "nominal", title: "Sport", header: { labelAngle: 0 } },
+            tooltip: [
+                { field: "sport", title: "Sport" },
+                { field: "entry_point", title: "Entry Point" },
+                { field: "outcome", title: "Outcome" },
+                { field: "percent", title: "Percentage (%)", format: ".1f" }
+            ]
+        }
+    };
+    
+    // Render all charts
+    window.addEventListener('load', function() {
+        vegaEmbed('#heatmap-male', heatmapMale).catch(console.warn);
+        vegaEmbed('#heatmap-female', heatmapFemale).catch(console.warn);
+        vegaEmbed('#grouped-bar', groupedBar).catch(console.warn);
+        vegaEmbed('#choropleth-map', choroplethMap).catch(console.warn);
+        vegaEmbed('#stacked-bar', stackedBar).catch(console.warn);
+        vegaEmbed('#streamgraph', streamgraph).catch(console.warn);
+        vegaEmbed('#lollipop', lollipop).catch(console.warn);
+        vegaEmbed('#slope-chart', slopeChart).catch(console.warn);
+        vegaEmbed('#bubble-chart', bubbleChart).catch(console.warn);
+        vegaEmbed('#funnel', funnel).catch(console.warn);
+        vegaEmbed('#alluvial', alluvial).catch(console.warn);
+    });
+</script>
+</body>
+</html>
