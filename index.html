@@ -329,51 +329,46 @@
         config: chartConfig
     };
     
-    // ============================================
-    // 5. Choropleth Map - FIXED with Vega GeoJSON
-    // ============================================
-    const choroplethMap = {
-        title: "Dominant Sport by State",
-        width: "container",
-        height: 450,
-        projection: { type: "mercator", center: [133, -25], scale: 500 },
-        data: {
-            url: "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
-            format: { type: "geojson", feature: "features" }
-        },
-        transform: [
-            {
-                lookup: "properties.STATE_NAME",
-                from: {
-                    data: { url: DATA_BASE + "/dominant_sport_by_state.csv" },
-                    key: "state",
-                    fields: ["sport", "participants", "popularity_index"]
-                }
-            },
-            {
-                calculate: "datum.sport == 'AFL' ? '#D32F2F' : (datum.sport == 'Rugby League' ? '#388E3C' : '#1976D2')",
-                as: "color_value"
-            }
-        ],
-        mark: { type: "geoshape", stroke: "white", strokeWidth: 1.5, tooltip: true },
-        encoding: {
-            color: {
-                field: "color_value",
-                type: "nominal",
-                title: "Dominant Sport",
-                scale: null,
-                legend: {
-                    labelExpr: "datum.value == '#D32F2F' ? 'AFL' : (datum.value == '#388E3C' ? 'Rugby League' : 'Rugby Union')"
-                }
-            },
-            tooltip: [
-                { field: "properties.STATE_NAME", type: "nominal", title: "State" },
-                { field: "sport", type: "nominal", title: "Dominant Sport" },
-                { field: "participants", type: "quantitative", title: "Participants", format: ",.0f" }
-            ]
-        },
-        config: { view: { stroke: null } }
-    };
+  // ============================================
+  // 5. Choropleth Map - FIXED with Vega GeoJSON
+  // ============================================  
+  const choroplethMap = {
+  title: "Dominant Sport by State",
+  width: "container",
+  height: 450,
+  projection: { type: "mercator", center: [133, -25], scale: 500 },
+  data: {
+    url: "https://raw.githubusercontent.com/vega/vega-datasets/main/data/au_state.geojson",
+    format: { type: "topojson", feature: "states" }  // 注意：有时是 topojson 格式
+  },
+  transform: [
+    {
+      lookup: "properties.STATE_NAME",
+      from: {
+        data: { url: DATA_BASE + "/dominant_sport_by_state.csv" },
+        key: "state",
+        fields: ["sport", "participants"]
+      }
+    }
+  ],
+  mark: { type: "geoshape", stroke: "white", strokeWidth: 1.5 },
+  encoding: {
+    color: {
+      field: "sport",
+      type: "nominal",
+      title: "Dominant Sport",
+      scale: {
+        domain: ["AFL", "Rugby League", "Rugby Union"],
+        range: ["#D32F2F", "#388E3C", "#1976D2"]
+      }
+    },
+    tooltip: [
+      { field: "properties.STATE_NAME", type: "nominal", title: "State" },
+      { field: "sport", type: "nominal", title: "Dominant Sport" },
+      { field: "participants", type: "quantitative", title: "Participants", format: ",.0f" }
+    ]
+  }
+};
     
     // ============================================
     // 6. Stacked Bar Chart - State Sport Popularity
