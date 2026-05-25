@@ -332,41 +332,19 @@
   // ============================================
   // 5. Choropleth Map - FIXED with Vega GeoJSON
   // ============================================  
- const choroplethMap = {
-  title: "Dominant Sport by State",
+const choroplethMap = {
+  title: "Australian States (Test Map)",
   width: "container",
   height: 450,
   projection: { type: "mercator", center: [133, -25], scale: 500 },
   data: {
     url: "https://raw.githubusercontent.com/vega/vega-datasets/main/data/au_state.geojson",
-    format: { type: "topojson", feature: "states" }  // 注意：有时是 topojson 格式
+    format: { type: "geojson", feature: "features" }
   },
-  transform: [
-    {
-      lookup: "properties.STATE_NAME",
-      from: {
-        data: { url: DATA_BASE + "/dominant_sport_by_state.csv" },
-        key: "state",
-        fields: ["sport", "participants"]
-      }
-    }
-  ],
-  mark: { type: "geoshape", stroke: "white", strokeWidth: 1.5 },
+  mark: { type: "geoshape", stroke: "white", strokeWidth: 1 },
   encoding: {
-    color: {
-      field: "sport",
-      type: "nominal",
-      title: "Dominant Sport",
-      scale: {
-        domain: ["AFL", "Rugby League", "Rugby Union"],
-        range: ["#D32F2F", "#388E3C", "#1976D2"]
-      }
-    },
-    tooltip: [
-      { field: "properties.STATE_NAME", type: "nominal", title: "State" },
-      { field: "sport", type: "nominal", title: "Dominant Sport" },
-      { field: "participants", type: "quantitative", title: "Participants", format: ",.0f" }
-    ]
+    color: { value: "#ccc" },
+    tooltip: [{ field: "properties.STATE_NAME", type: "nominal", title: "State" }]
   }
 };
     
