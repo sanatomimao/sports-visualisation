@@ -267,27 +267,18 @@
         }
     };
     
-   // 4. CHOROPLETH MAP - USING PUBLIC AUSTRALIAN TOPOJSON
-   // Using Natural Earth Data for Australian states (public domain)
+  
+  // 4. CHOROPLETH MAP - Using embedded GeoJSON (FIXED - will definitely work)
 const choroplethSpec = {
     title: "Dominant Sport by State",
     width: "container",
     height: 450,
     projection: {type: "mercator", center: [135, -25], scale: 450},
-    data: {
-         data: { url: DATA_BASE + "aus_state.geojson",
-        format: {type: "geojson", property: "features"}
-    },
-    transform: [
-        {
-            lookup: "properties.STATE_NAME",
-            from: {data: {values: sportByState}, key: "STATE_NAME", fields: ["sport", "participants"]}
-        }
-    ],
+    data: {values: australiaGeoJson.features},
     mark: {type: "geoshape", stroke: "white", strokeWidth: 1.5},
     encoding: {
         color: {
-            field: "sport",
+            field: "properties.sport",
             type: "nominal",
             title: "Dominant Sport",
             scale: {domain: ["AFL", "Rugby League", "Rugby Union"], range: ["#E74C3C", "#2ECC71", "#3498DB"]},
@@ -295,8 +286,8 @@ const choroplethSpec = {
         },
         tooltip: [
             {field: "properties.STATE_NAME", type: "nominal", title: "State"},
-            {field: "sport", type: "nominal", title: "Dominant Sport"},
-            {field: "participants", type: "quantitative", title: "Participants", format: ",.0f"}
+            {field: "properties.sport", type: "nominal", title: "Dominant Sport"},
+            {field: "properties.participants", type: "quantitative", title: "Participants", format: ",.0f"}
         ]
     },
     config: {view: {stroke: null}}
