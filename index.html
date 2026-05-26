@@ -563,7 +563,7 @@
                 
                 {"type":"Feature","properties":{"id":"ACT","name":"Australian Capital Territory"},"geometry":{"type":"Polygon","coordinates":[[[148.7,-35.1],[149.4,-35.1],[149.4,-35.9],[148.7,-35.9],[148.7,-35.1]]]}}
                 
-                {"type":"Feature","properties":{"id":"WA","name":"Western Australia"},"geometry":{"type":"Polygon","coordinates":[[[113.0,-22.5],[112.0,-32.0],[129.0,-32.0],[129.0,-10.0],[141.0,-22.5]]]}},
+                {"type":"Feature","properties":{"id":"WA","name":"Western Australia"},"geometry":{"type":"Polygon","coordinates":[[[113.0,-22.5],[112.0,-32.0],[129.0,-32.0],[129.0,-10.0],[112.0,-22.5]]]}},
                 
                 {"type":"Feature","properties":{"id":"SA","name":"South Australia"},"geometry":{"type":"Polygon","coordinates":[[[129.0,-32.0],[141.0,-26.0],[141.0,-34.0],[141.0,-37.5],[137.0,-38.0],[129.0,-38.0],[129.0,-32.0]]]}},
                 
@@ -571,8 +571,10 @@
                 
                 {"type":"Feature","properties":{"id":"NT","name":"Northern Territory"},"geometry":{"type":"Polygon","coordinates":[[[129.0,-11.0],[138.0,-17.5],[141.0,-17.5],[141.0,-26.0],[129.0,-32.0],[129.0,-11.0]]]}},
             ]},
+                                                
             format: { type: "json", property: "features" }
         },
+                     
         transform: [
             {
                 lookup: "properties.id",
