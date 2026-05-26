@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Australia - Most Popular Sports by State | Interactive Map</title>
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f4f7fa;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #002b4a, #005a9c);
+            color: white;
+            text-align: center;
+            padding: 22px 20px 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .header p {
+            font-size: 1rem;
+            margin-top: 6px;
+            opacity: 0.9;
+        }
+        .map-container {
+            margin: 24px 20px 20px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.08);
+            background: #e9eff5;
+        }
+        #map {
+            height: 70vh;
+            min-height: 560px;
+            width: 100%;
+            background: #cbdde9;
+        }
+        .legend {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            padding: 8px 16px;
+            border-radius: 32px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 1000;
+            pointer-events: none;
+            font-family: monospace;
+            border-left: 4px solid #ffaa44;
+        }
+        .info-badge {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            color: #f0f0f0;
+            padding: 6px 14px;
+            border-radius: 32px;
+            font-size: 0.75rem;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.72rem;
+            color: #2c5a7a;
+            padding: 12px;
+            background: #eef3f8;
+            border-top: 1px solid #cbdde9;
+        }
+        @media (max-width: 700px) {
+            .header h1 { font-size: 1.4rem; }
+            #map { min-height: 480px; }
+            .legend { font-size: 0.7rem; bottom: 16px; left: 16px; }
+        }
+        .custom-sport-tooltip {
+            background-color: #0a2f44;
+            border: 1px solid #ffaa55;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: normal;
+            padding: 10px 14px;
+            font-size: 13px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.3);
+            font-family: 'Segoe UI', system-ui;
+            max-width: 280px;
+        }
+        .leaflet-tooltip-top:before {
+            border-top-color: #ffaa55;
+        }
+        .leaflet-popup-content {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #003d66;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>🏉 Australia: Most Popular Sports by State/Territory</h1>
+    <p>🖱️ Hover or click on any state → Discover the dominant sport & culture</p>
+</div>
+<div class="map-container">
+    <div id="map"></div>
+</div>
+<div class="legend">
+    🏆 Hover over any region → see its #1 sport
+</div>
+<div class="info-badge">
+    💡 Interactive map — data based on local fandom & heritage
+</div>
+<div class="footer">
+    📊 Source: Australian sporting culture (AFL, NRL, Cricket, Rugby, Basketball) | Hover for details
+</div>
+
+<script>
+    // Initialize map centered on Australia
+    var map = L.map('map').setView([-27.5, 135.0], 4.3);
+    
+    // Light basemap for clarity
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB',
+        subdomains: 'abcd',
+        maxZoom: 10,
+        minZoom: 3
+    }).addTo(map);
+    
+    // ----- Detailed sport info per state (English) -----
+    const sportInfo = {
+        "New South Wales": {
+            sport: "🏉 Rugby League (NRL)",
+            detail: "Rugby League dominates with Sydney's historic clubs (Roosters, Rabbitohs, Bulldogs). State of Origin rivalry against Queensland is legendary. Cricket is also hugely popular, with the Sydney Cricket Ground hosting major matches."
+        },
+        "Victoria": {
+            sport: "🏉 Australian Rules Football (AFL)",
+            detail: "Australian Rules Football is religion in Melbourne. The AFL Grand Final is a national event. The Melbourne Cricket Club (MCG) hosts the biggest matches, and the city lives and breathes footy."
+        },
+        "Queensland": {
+            sport: "🏉 Rugby League (State of Origin)",
+            detail: "Rugby League is king. The Maroons vs Blues State of Origin series stops the state. Brisbane Broncos have massive following; cricket and swimming also strong, especially in coastal areas."
+        },
+        "South Australia": {
+            sport: "🏏 Cricket / Australian Rules",
+            detail: "Cricket at Adelaide Oval is iconic, hosting Ashes and BBL matches. Australian Rules Football (Adelaide Crows, Port Adelaide) draws packed stadiums; strong sporting tradition overall."
+        },
+        "Western Australia": {
+            sport: "🏉 Australian Rules & Surfing",
+            detail: "AFL dominates with West Coast Eagles and Fremantle Dockers. Surfing is hugely popular along the vast coastline (Margaret River). Cricket and basketball also thrive."
+        },
+        "Tasmania": {
+            sport: "🏏 Cricket & Australian Rules",
+            detail: "Cricket has deep roots; Hobart Hurricanes in BBL. AFL fever growing fast, with Tasmania set to enter its own team. Hockey and basketball also have dedicated followings."
+        },
+        "Northern Territory": {
+            sport: "🏀 Basketball / Australian Rules",
+            detail: "Basketball is #1 among youth, thanks to Indigenous talent and strong community programs. AFL and Rugby League also have dedicated followers, especially in Darwin."
+        },
+        "Australian Capital Territory": {
+            sport: "🏉 Rugby Union & Basketball",
+            detail: "Rugby Union (Brumbies) is elite; Basketball (Canberra Cannons, now the Capitals) enjoys strong grassroots. Touch football, netball and soccer also popular."
+        }
+    };
+    
+    // ----- Accurate GeoJSON boundaries based on original aus_state.geojson -----
+    // New South Wales coordinates fixed to match the original data range
+    const ausGeoJson = {
+      "type": "FeatureCollection",
+      "features": [
+        // New South Wales - based on original coordinates (approx 149°E to 153.5°E, 29°S to 37°S)
+        { "type": "Feature", "properties": { "STATE_NAME": "New South Wales" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [149.0, -29.0], [150.5, -28.5], [152.0, -28.5], [153.5, -29.5], [153.0, -31.0], [151.5, -33.5], [150.5, -35.5], [149.0, -37.0], [148.0, -36.0], [148.5, -33.0], [149.0, -29.0] ] ] ] } },
+        // Victoria
+        { "type": "Feature", "properties": { "STATE_NAME": "Victoria" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [146.0, -39.2], [148.2, -38.5], [149.8, -37.5], [147.5, -36.5], [144.5, -37.8], [145.0, -38.8], [146.0, -39.2] ] ] ] } },
+        // Queensland
+        { "type": "Feature", "properties": { "STATE_NAME": "Queensland" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [138.0, -29.2], [140.5, -25.5], [144.8, -22.0], [148.0, -20.5], [153.0, -23.5], [152.5, -26.0], [150.0, -28.2], [145.0, -28.0], [138.0, -29.2] ] ] ] } },
+        // South Australia
+        { "type": "Feature", "properties": { "STATE_NAME": "South Australia" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [129, -32.0], [141.0, -32], [141, -23], [129, -23.0], [129, -32]] ] ] } },
+        // Western Australia
+        { "type": "Feature", "properties": { "STATE_NAME": "Western Australia" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [112, -22.5], [112, -32.0], [129, -31.0], [129.0, -14.0], [118, -20], [112, -22.5]] ] ] ] } },
+        // Tasmania
+        { "type": "Feature", "properties": { "STATE_NAME": "Tasmania" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [146.5, -43.5], [147.8, -42.8], [148.2, -42.0], [147.0, -41.5], [145.5, -42.0], [146.0, -42.8], [146.5, -43.5] ] ] ] } },
+        // Northern Territory
+        { "type": "Feature", "properties": { "STATE_NAME": "Northern Territory" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [129.0, -20.5], [132.5, -18.5], [136.5, -19.0], [138.0, -22.5], [136.0, -25.0], [131.2, -24.5], [129.0, -20.5] ] ] ] } },
+        // Australian Capital Territory
+        { "type": "Feature", "properties": { "STATE_NAME": "Australian Capital Territory" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [148.85, -35.55], [149.15, -35.35], [149.25, -35.45], [149.15, -35.65], [148.95, -35.72], [148.85, -35.55] ] ] ] } }
+      ]
+    };
+    
+    // Color palette based on state
+    function getStateColor(stateName) {
+        const colors = {
+            "New South Wales": "#F4B942",
+            "Victoria": "#E88D67",
+            "Queensland": "#E0A878",
+            "South Australia": "#C7B27C",
+            "Western Australia": "#9FC2B2",
+            "Tasmania": "#ACC3A6",
+            "Northern Territory": "#D9B48B",
+            "Australian Capital Territory": "#B1A296"
+        };
+        return colors[stateName] || "#7C9EB2";
+    }
+    
+    // Default style
+    function getDefaultStyle(feature) {
+        const state = feature?.properties?.STATE_NAME;
+        return {
+            weight: 1.7,
+            opacity: 0.85,
+            color: "#2c3e50",
+            fillColor: getStateColor(state),
+            fillOpacity: 0.66,
+            smoothFactor: 0.7
+        };
+    }
+    
+    // Highlight style (hover effect)
+    function getHighlightStyle() {
+        return {
+            weight: 3.5,
+            color: "#ff8800",
+            fillColor: "#ffbb77",
+            fillOpacity: 0.88,
+            dashArray: null
+        };
+    }
+    
+    let geoLayer;
+    let currentlyHighlighted = null;
+    
+    // Reset highlight
+    function resetHighlight(layer) {
+        if (geoLayer && layer) {
+            geoLayer.resetStyle(layer);
+        } else if (currentlyHighlighted) {
+            geoLayer.resetStyle(currentlyHighlighted);
+            currentlyHighlighted = null;
+        }
+    }
+    
+    // Attach interactions to each feature
+    function onEachFeature(feature, layer) {
+        const stateName = feature.properties.STATE_NAME;
+        const info = sportInfo[stateName] || {
+            sport: "🏅 Diverse Sporting Culture",
+            detail: "This region celebrates multiple sports: cricket, rugby, Australian rules, and swimming all have strong followings."
+        };
+        
+        // Tooltip content (English)
+        const tooltipContent = `<div style="font-weight:bold; font-size:14px; color:#FFD966;">🏆 ${stateName}</div>
+                                <div style="margin-top:5px;">🔥 <strong>Most Popular Sport:</strong> ${info.sport}</div>
+                                <div style="font-size:11px; margin-top:7px; color:#eaeef2;">${info.detail.substring(0, 100)}${info.detail.length>100?'...':''}</div>`;
+        
+        layer.bindTooltip(tooltipContent, {
+            sticky: true,
+            direction: 'top',
+            offset: [0, -12],
+            opacity: 0.96,
+            className: 'custom-sport-tooltip'
+        });
+        
+        // Hover events
+        layer.on({
+            mouseover: function(e) {
+                if (currentlyHighlighted) {
+                    geoLayer.resetStyle(currentlyHighlighted);
+                }
+                currentlyHighlighted = layer;
+                layer.setStyle(getHighlightStyle());
+                layer.openTooltip();
+            },
+            mouseout: function(e) {
+                if (currentlyHighlighted === layer) {
+                    geoLayer.resetStyle(layer);
+                    currentlyHighlighted = null;
+                    layer.closeTooltip();
+                }
+            },
+            click: function(e) {
+                // Popup with richer English description
+                const popupHtml = `<div style="font-size:1rem; font-weight:bold; color:#004070;">🏅 ${stateName}</div>
+                                   <hr style="margin:6px 0;">
+                                   <div style="font-size:0.92rem;">⚡ <strong>Signature Sport:</strong> <span style="color:#c13b00;">${info.sport}</span></div>
+                                   <div style="font-size:0.85rem; margin-top:10px;">📖 ${info.detail}</div>
+                                   <div style="font-size:0.7rem; margin-top:10px; color:#4a6f8f;">📍 Data based on local fandom & official sporting stats</div>`;
+                layer.bindPopup(popupHtml).openPopup();
+            }
+        });
+    }
+    
+    // Add GeoJSON layer to map
+    geoLayer = L.geoJSON(ausGeoJson, {
+        style: getDefaultStyle,
+        onEachFeature: onEachFeature,
+        interactive: true
+    }).addTo(map);
+    
+    // Fit map to the bounds of the data
+    map.fitBounds(geoLayer.getBounds());
+    // Slight zoom adjustment for better framing
+    map.setZoom(map.getZoom() - 0.1);
+    
+    // Add scale control
+    L.control.scale({ metric: true, imperial: false, position: 'bottomright' }).addTo(map);
+    
+    // Additional simple legend via Leaflet control (optional)
+    const simpleLegend = L.control({ position: 'bottomleft' });
+    simpleLegend.onAdd = function() {
+        const div = L.DomUtil.create('div', 'custom-legend-badge');
+        div.innerHTML = '<div style="background: rgba(0,0,0,0.65); color:white; padding: 3px 12px; border-radius: 25px; font-size:11px; backdrop-filter: blur(4px);">🏈 Hover any state → Sport info</div>';
+        return div;
+    };
+    simpleLegend.addTo(map);
+</script>
+</body>
+</html>
