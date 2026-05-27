@@ -348,7 +348,7 @@ const roiChart={
         $schema:"https://vega.github.io/schema/vega-lite/v5.json",
         title:"Funding Efficiency: Medals per $10M (2025)",
         width:"container",height:350,
-        data:{url:"data/sports_fan_funnel.csv",format:{type:"csv"}
+        data:{url:"data/funding_vs_medals.csv",format:{type:"csv"}
         },
         transform:[{filter:"datum.year==2025"},{calculate:"datum.major_event_medals /datum.funding_million_aud * 10",as:"medals_per_10m"}],
         mark:"bar",encoding:{y:{field:"sport",type:"nominal",title:"Sport",sort:"-x"},x:{field:"medals_per_10m",type:"quantitative",title:"Medals per $10M Funding"},color:{field:"medals_per_10m",type:"quantitative",title:"Efficiency",scale:{scheme:"yellowgreenblue",domain:[0,4]}},tooltip:[{field:"sport"},{field:"funding_million_aud",title:"Funding (M)",format:".0f"},{field:"major_event_medals",title:"Medals"},{field:"medals_per_10m",title:"Medals / $10M",format:".2f"}]},config:CFG};
