@@ -670,7 +670,7 @@
         // 5. Choropleth Map
         const choroplethMap = {
             $schema: "https://vega.github.io/schema/vega-lite/v5.json", title: "Dominant Sport by State", width: "container", height: 450,
-            projection: { type: "mercator", center: [134, -28], scale: 450 },
+            projection: { type: "albers", center: [0, -25], rotate: [134, 0, 0], scale: 500, parallels: [-30, -40]}
             data: { url: "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json", format: { type: "json", property: "features" } },
             transform: [{
                 lookup: "properties.STATE_NAME",
