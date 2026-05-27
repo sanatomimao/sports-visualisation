@@ -35,6 +35,7 @@ h3{font-size:clamp(1rem,2vw,1.25rem);margin-bottom:0.75rem;color:#2C3E50;font-we
 .viz-card{background:var(--card-bg);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow);transition:all 0.3s ease;border:1px solid rgba(0,0,0,0.04)}
 .viz-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:rgba(231,76,60,0.1)}
 .viz-container{min-height:350px;width:100%}
+.viz-container-small{min-height:300px;width:100%}
 .viz-caption{font-size:0.85rem;color:#7F8C8D;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #ECF0F1}
 .insight-box{background:linear-gradient(135deg,#FFF5F0 0%,#FFF 100%);border-left:4px solid var(--accent);padding:1rem 1.5rem;margin:1rem 0;border-radius:0 12px 12px 0;font-size:0.95rem;color:#5A3A2E;box-shadow:0 2px 8px rgba(231,76,60,0.08)}
 .insight-box i{color:var(--accent);margin-right:0.5rem}
@@ -52,6 +53,7 @@ h3{font-size:clamp(1rem,2vw,1.25rem);margin-bottom:0.75rem;color:#2C3E50;font-we
 .footer h3,.footer h4{color:white;border-left:none;padding-left:0}
 .filter-indicator{text-align:center;margin-top:1rem;padding:0.5rem;background:#f0f4f8;border-radius:30px;display:inline-block;width:auto;margin-left:auto;margin-right:auto}
 .filter-indicator span{font-weight:600;color:var(--accent)}
+.comparison-note{background:#FFF8E1;border-left:4px solid #FFC107;padding:0.75rem 1rem;margin:0.5rem 0 1rem 0;border-radius:0 8px 8px 0;font-size:0.85rem}
 @media(max-width:768px){.container{padding:1rem}.viz-card{padding:1rem}.hero{padding:2.5rem 0.5rem 2rem}.controls{gap:0.3rem}.ctrl-btn{padding:0.4rem 0.7rem;font-size:0.8rem}}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#c1c1c1;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#a8a8a8}
 </style>
@@ -75,7 +77,7 @@ h3{font-size:clamp(1rem,2vw,1.25rem);margin-bottom:0.75rem;color:#2C3E50;font-we
 <i class="fas fa-filter"></i> Currently viewing: <span id="activeFilter">All Sports</span>
 </div>
 <div style="margin-top:1rem">
-<span class="badge"><i class="fas fa-chart-line"></i> 13 Interactive Visualisations</span>
+<span class="badge"><i class="fas fa-chart-line"></i> 14 Interactive Visualisations</span>
 <span class="badge badge-blue"><i class="fas fa-map"></i> Albers Projection Map</span>
 <span class="badge badge-green"><i class="fas fa-calculator"></i> Custom ROI Analysis</span>
 <span class="badge badge-purple"><i class="fas fa-filter"></i> Cross-Chart Filtering</span>
@@ -114,8 +116,8 @@ h3{font-size:clamp(1rem,2vw,1.25rem);margin-bottom:0.75rem;color:#2C3E50;font-we
 <div class="pure-u-1 pure-u-md-1-2">
 <div class="viz-card">
 <h3><i class="fas fa-chart-column" style="color:var(--accent)"></i> AFL Participation by Age & Gender</h3>
-<div id="grouped-bar" class="viz-container"><div class="loading"><i class="fas fa-spinner"></i><span>Loading data...</span></div></div>
-<div class="insight-box-blue"><i class="fas fa-chart-line"></i> Participation peaks at ages 5-14, then declines by over 50% by age 55+.</div>
+<div id="grouped-bar" class="viz-container-small"><div class="loading"><i class="fas fa-spinner"></i><span>Loading data...</span></div></div>
+<div class="insight-box-blue"><i class="fas fa-chart-line"></i> Participation peaks at ages 5-14 (80% male, 71% female), then declines by over 50% by age 55+.</div>
 </div>
 </div>
 </div>
@@ -166,14 +168,30 @@ h3{font-size:clamp(1rem,2vw,1.25rem);margin-bottom:0.75rem;color:#2C3E50;font-we
 <div class="section">
 <h2>💰 Act 4: Funding Efficiency & Medal ROI</h2>
 <p style="margin-bottom:1.5rem;color:var(--text-secondary)">Swimming delivers the strongest ROI. Basketball and Tennis show lower efficiency despite increased funding.</p>
+
+<!-- ACT 4 - Split into two separate charts for clarity -->
 <div class="pure-g">
 <div class="pure-u-1 pure-u-md-1-2">
 <div class="viz-card">
-<h3><i class="fas fa-chart-line" style="color:var(--accent-green)"></i> Funding vs Medals Trajectory (2019 → 2025)</h3>
-<div id="slope-chart" class="viz-container"><div class="loading"><i class="fas fa-spinner"></i><span>Loading data...</span></div></div>
-<div class="viz-caption"><i class="fas fa-arrow-trend-up"></i> Each line connects 2019 and 2025. Steeper upward slope = faster improvement.</div>
+<h3><i class="fas fa-dollar-sign" style="color:var(--accent-green)"></i> Funding Growth (2019 → 2025)</h3>
+<div id="funding-slope" class="viz-container"><div class="loading"><i class="fas fa-spinner"></i><span>Loading data...</span></div></div>
+<div class="viz-caption"><i class="fas fa-chart-line"></i> Swimming received the largest funding increase (+$16M). Basketball funding grew by 43%.</div>
 </div>
 </div>
+<div class="pure-u-1 pure-u-md-1-2">
+<div class="viz-card">
+<h3><i class="fas fa-medal" style="color:var(--accent)"></i> Medal Achievement Growth (2019 → 2025)</h3>
+<div id="medal-slope" class="viz-container"><div class="loading"><i class="fas fa-spinner"></i><span>Loading data...</span></div></div>
+<div class="viz-caption"><i class="fas fa-chart-line"></i> Swimming added 6 medals (+38%). Athletics doubled medals from 5 to 9.</div>
+</div>
+</div>
+</div>
+
+<div class="comparison-note">
+<i class="fas fa-chart-simple"></i> <strong>How to read:</strong> Each line connects 2019 (left) to 2025 (right). Upward slope = increase. Steeper slope = faster growth. Compare the two charts to see funding vs medal returns.
+</div>
+
+<div class="pure-g">
 <div class="pure-u-1 pure-u-md-1-2">
 <div class="viz-card">
 <h3><i class="fas fa-circle" style="color:var(--accent-purple)"></i> Funding × Medals Bubble Chart (2025)</h3>
@@ -181,9 +199,7 @@ h3{font-size:clamp(1rem,2vw,1.25rem);margin-bottom:0.75rem;color:#2C3E50;font-we
 <div class="insight-box-blue"><i class="fas fa-chart-scatter"></i> Bubble size = funding amount. Position shows medals relative to investment.</div>
 </div>
 </div>
-</div>
-<div class="pure-g">
-<div class="pure-u-1 pure-u-md-1-1">
+<div class="pure-u-1 pure-u-md-1-2">
 <div class="viz-card">
 <h3><i class="fas fa-gauge-high" style="color:var(--accent)"></i> Funding Efficiency: Medals per $10M (2025)</h3>
 <div id="roi-chart" class="viz-container"><div class="loading"><i class="fas fa-spinner"></i><span>Loading data...</span></div></div>
@@ -325,20 +341,22 @@ const chartSpecs = {
             tooltip: [{ field: "sport", title: "Sport" }, { field: "gender", title: "Gender" }, { field: "participation_index", title: "Rate (%)", format: ".1f" }]
         }
     },
+    // Modified grouped bar with reduced height and optimized y-axis
     groupedBar: {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
         title: "AFL Participation by Age Group and Gender",
         width: "container",
-        height: 400,
+        height: 300,
         data: { url: "data/age_gender_sport_matrix.csv" },
         transform: [{ filter: "datum.sport === 'AFL'" }],
         mark: "bar",
         encoding: {
             x: { field: "age_group", type: "ordinal", title: "Age Group", sort: ["5-14","15-24","25-34","35-44","45-54","55+"] },
-            y: { field: "participation_index", type: "quantitative", title: "Participation Rate (%)", scale: { domain: [0, 90] } },
+            y: { field: "participation_index", type: "quantitative", title: "Participation Rate (%)", scale: { domain: [0, 90], nice: true }, axis: { tickCount: 5, format: "d", grid: true } },
             color: { field: "gender", type: "nominal", title: "Gender", scale: { domain: ["Male","Female"], range: ["#3498DB","#E74C3C"] } },
             tooltip: [{ field: "age_group", title: "Age Group" }, { field: "gender", title: "Gender" }, { field: "participation_index", title: "Rate (%)", format: ".1f" }]
-        }
+        },
+        config: { axis: { labelFontSize: 11, titleFontSize: 12 }, view: { stroke: null } }
     },
     choroplethMap: {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
@@ -399,30 +417,43 @@ const chartSpecs = {
             tooltip: [{ field: "venue", title: "Venue" }, { field: "avg_utilisation_percent", title: "Utilisation (%)", format: ".1f" }, { field: "capacity_thousand", title: "Capacity (k)" }, { field: "annual_attendance_millions", title: "Attendance (M)", format: ".2f" }]
         }
     },
-    slopeChart: {
+    // SPLIT: Funding only slope chart
+    fundingSlope: {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-        title: "Funding vs Medals (2019 → 2025)",
+        title: "Funding Growth Trajectory (2019 → 2025)",
         width: "container",
-        height: 400,
+        height: 380,
         data: { url: "data/funding_vs_medals.csv" },
-        transform: [{ fold: ["funding_million_aud", "major_event_medals"], as: ["metric", "value"] }],
-        facet: { field: "metric", type: "nominal", columns: 2, title: null },
-        spec: {
-            mark: { type: "line", point: { filled: true, size: 80 }, strokeWidth: 2 },
-            encoding: {
-                x: { field: "year", type: "ordinal", title: "Year" },
-                y: { field: "value", type: "quantitative", title: "Value" },
-                color: { field: "sport", type: "nominal", title: "Sport" },
-                tooltip: [{ field: "sport", title: "Sport" }, { field: "year", title: "Year" }, { field: "value", title: "Value", format: ".1f" }]
-            }
+        mark: { type: "line", point: { filled: true, size: 100 }, strokeWidth: 2.5 },
+        encoding: {
+            x: { field: "year", type: "ordinal", title: "Year", axis: { labelFontSize: 12, titleFontSize: 13 } },
+            y: { field: "funding_million_aud", type: "quantitative", title: "Funding (AUD Million)", axis: { grid: true, titleFontSize: 13 } },
+            color: { field: "sport", type: "nominal", title: "Sport", scale: { scheme: "tableau10" }, legend: { orient: "bottom", titleFontSize: 11, labelFontSize: 10, columns: 4 } },
+            tooltip: [{ field: "sport", title: "Sport" }, { field: "year", title: "Year" }, { field: "funding_million_aud", title: "Funding (M AUD)", format: ".0f" }]
         },
-        resolve: { scale: { y: "independent" } }
+        config: { axis: { labelFontSize: 11 }, view: { stroke: null } }
+    },
+    // SPLIT: Medals only slope chart
+    medalSlope: {
+        $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+        title: "Medal Achievement Trajectory (2019 → 2025)",
+        width: "container",
+        height: 380,
+        data: { url: "data/funding_vs_medals.csv" },
+        mark: { type: "line", point: { filled: true, size: 100 }, strokeWidth: 2.5 },
+        encoding: {
+            x: { field: "year", type: "ordinal", title: "Year", axis: { labelFontSize: 12, titleFontSize: 13 } },
+            y: { field: "major_event_medals", type: "quantitative", title: "Medal Count", axis: { grid: true, titleFontSize: 13 } },
+            color: { field: "sport", type: "nominal", title: "Sport", scale: { scheme: "tableau10" }, legend: { orient: "bottom", titleFontSize: 11, labelFontSize: 10, columns: 4 } },
+            tooltip: [{ field: "sport", title: "Sport" }, { field: "year", title: "Year" }, { field: "major_event_medals", title: "Medals" }]
+        },
+        config: { axis: { labelFontSize: 11 }, view: { stroke: null } }
     },
     bubbleChart: {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
         title: "2025: Funding vs Medals",
         width: "container",
-        height: 400,
+        height: 380,
         data: { url: "data/funding_vs_medals.csv" },
         transform: [{ filter: "datum.year === 2025" }],
         mark: "circle",
@@ -430,9 +461,10 @@ const chartSpecs = {
             x: { field: "funding_million_aud", type: "quantitative", title: "Funding (AUD Million)" },
             y: { field: "major_event_medals", type: "quantitative", title: "Medal Count" },
             size: { field: "funding_million_aud", type: "quantitative", legend: null },
-            color: { field: "sport", type: "nominal", title: "Sport" },
-            tooltip: [{ field: "sport" }, { field: "funding_million_aud", title: "Funding (M)", format: ".1f" }, { field: "major_event_medals", title: "Medals" }]
-        }
+            color: { field: "sport", type: "nominal", title: "Sport", scale: { scheme: "tableau10" } },
+            tooltip: [{ field: "sport" }, { field: "funding_million_aud", title: "Funding (M)", format: ".0f" }, { field: "major_event_medals", title: "Medals" }]
+        },
+        config: { axis: { labelFontSize: 11 }, view: { stroke: null } }
     },
     roiChart: {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
@@ -447,7 +479,8 @@ const chartSpecs = {
             x: { field: "medals_per_10m", type: "quantitative", title: "Medals per $10M Funding" },
             color: { field: "medals_per_10m", type: "quantitative", title: "Efficiency", scale: { scheme: "yellowgreenblue", domain: [0, 4] } },
             tooltip: [{ field: "sport" }, { field: "funding_million_aud", title: "Funding (M)", format: ".0f" }, { field: "major_event_medals", title: "Medals" }, { field: "medals_per_10m", title: "Medals / $10M", format: ".2f" }]
-        }
+        },
+        config: { axis: { labelFontSize: 11 }, view: { stroke: null } }
     },
     funnel: {
         $schema: "https://vega.github.io/schema/vega-lite/v5.json",
@@ -484,7 +517,6 @@ const chartSpecs = {
 function updateChartsWithFilter(sport) {
     const isFiltered = sport !== 'all';
     
-    // Update filter indicator
     const filterIndicator = document.getElementById('filterIndicator');
     const activeFilterSpan = document.getElementById('activeFilter');
     if (isFiltered) {
@@ -494,7 +526,6 @@ function updateChartsWithFilter(sport) {
         filterIndicator.style.display = 'none';
     }
     
-    // Update charts that support filtering (heatmaps, gender gap, grouped bar)
     const filterableChartIds = ['heatmap-male', 'heatmap-female', 'gender-gap', 'grouped-bar'];
     
     filterableChartIds.forEach(chartId => {
@@ -518,14 +549,12 @@ function updateChartsWithFilter(sport) {
             if (!spec.transform) spec.transform = [];
             spec.transform.push({ filter: `datum.sport === '${sport}'` });
         } else if (spec && !isFiltered) {
-            // Remove sport filter if exists
             if (spec.transform) {
                 spec.transform = spec.transform.filter(t => !t.filter || !t.filter.includes('datum.sport'));
             }
         }
         
         if (spec && viewRefs[chartId]) {
-            viewRefs[chartId].view.signal('width', null).runAsync();
             vegaEmbed(`#${chartId}`, spec, { actions: false }).then(res => {
                 viewRefs[chartId] = res;
             }).catch(err => console.warn(`Failed to update ${chartId}:`, err));
@@ -544,7 +573,8 @@ async function renderAllCharts() {
         { id: 'stacked-bar', spec: chartSpecs.stackedBar },
         { id: 'streamgraph', spec: chartSpecs.streamgraph },
         { id: 'lollipop', spec: chartSpecs.lollipop },
-        { id: 'slope-chart', spec: chartSpecs.slopeChart },
+        { id: 'funding-slope', spec: chartSpecs.fundingSlope },
+        { id: 'medal-slope', spec: chartSpecs.medalSlope },
         { id: 'bubble-chart', spec: chartSpecs.bubbleChart },
         { id: 'roi-chart', spec: chartSpecs.roiChart },
         { id: 'funnel', spec: chartSpecs.funnel },
@@ -568,7 +598,6 @@ async function renderAllCharts() {
     console.log(`✓ All charts rendered. Total: ${chartElements.length}`);
 }
 
-// Setup sport filter buttons
 function setupFilters() {
     const buttons = document.querySelectorAll('.ctrl-btn');
     buttons.forEach(btn => {
@@ -582,7 +611,6 @@ function setupFilters() {
     });
 }
 
-// Initialize on page load
 window.addEventListener('load', () => {
     renderAllCharts();
     setupFilters();
