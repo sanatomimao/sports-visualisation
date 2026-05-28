@@ -655,7 +655,8 @@
         title: "Dominant Sport by State",
         width: "container", height: 450,
         projection: { type: "mercator", center: [134, -28], scale: 450 },
-        data: { url: "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json", format: { type: "json", property: "features" } },
+        //data: { url: "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json", format: { type: "json", property: "features" } },
+        data: { url: "data/australian-states.json", format: { type: "json", property: "features" } },
         transform: [{
             lookup: "properties.STATE_NAME",
             from: { data: { url: "data/dominant_sport_by_state.csv", format: { type: "csv" } }, key: "state", fields: ["sport", "participants", "popularity_index"] }
