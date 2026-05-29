@@ -281,7 +281,18 @@ const heatmapMale={$schema:"https://vega.github.io/schema/vega-lite/v5.json",tit
                    format:{type:"csv"}},mark:"rect",encoding:{x:{field:"age_group",type:"ordinal",title:"Age Group",sort:["5-14","15-24","25-34","35-44","45-54","55+"]},y:{field:"sport",type:"nominal",
                    title:"Sport",sort:["AFL","Cricket","Soccer","Basketball","Tennis","Netball","Rugby League"]},color:{field:"participation_index",
                    type:"quantitative",title:"Rate (%)",scale:{scheme:"reds",domain:[0,90]}},tooltip:[{field:"sport",title:"Sport"},{field:"age_group",
-                   title:"Age Group"},{field:"participation_index",title:"Rate (%)",format:".1f"}]},config:CFG};
+                   title:"Age Group"},{field:"participation_index",title:"Rate (%)",format:".1f"}]},
+                   mark: { type: "rect", tooltip: true },
+                   layer: [
+                      { mark: "rect" },
+                      { mark: { type: "text", fontSize: 9, color: "white", align: "center", baseline: "middle" },
+                   encoding: { 
+                      text: { field: "participation_index", format: ".0f" },
+                      color: { value: "white" }
+                       }
+                    }
+                   ]              
+                   config:CFG};
 
 // 2. Female Heatmap
 const heatmapFemale={$schema:"https://vega.github.io/schema/vega-lite/v5.json",
