@@ -1,9 +1,9 @@
 state_code,state,sport,popularity_index,participants
-VIC,Victoria,AFL,92,620000
-QLD,Queensland,Rugby League,90,430000
-NSW,New South Wales,Rugby League,88,540000
-SA,South Australia,AFL,86,260000
-WA,Western Australia,AFL,83,310000
-TAS,Tasmania,AFL,78,95000
-NT,Northern Territory,AFL,74,28000
-ACT,Australian Capital Territory,Rugby Union,70,42000
+VIC,Victoria,AFL,92,185000
+QLD,Queensland,Rugby League,90,142000
+NSW,New South Wales,Rugby League,88,168000
+SA,South Australia,AFL,86,78000
+WA,Western Australia,AFL,83,92000
+TAS,Tasmania,AFL,78,28000
+NT,Northern Territory,AFL,74,8500
+ACT,Australian Capital Territory,Rugby Union,70,12000
