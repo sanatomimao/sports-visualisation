@@ -1,33 +1,40 @@
 state_code,state,sport,popularity_index,participants,share_percent
-VIC,Victoria,AFL,92,620000,38
-VIC,Victoria,Cricket,58,340000,21
-VIC,Victoria,Soccer,66,410000,25
-VIC,Victoria,Basketball,49,260000,16
-NSW,New South Wales,Rugby League,88,540000,34
-NSW,New South Wales,Soccer,72,500000,31
-NSW,New South Wales,Cricket,55,320000,20
-NSW,New South Wales,Basketball,45,240000,15
-QLD,Queensland,Rugby League,90,430000,36
-QLD,Queensland,AFL,48,210000,18
-QLD,Queensland,Cricket,57,250000,21
-QLD,Queensland,Soccer,62,300000,25
-WA,Western Australia,AFL,83,310000,37
-WA,Western Australia,Cricket,61,210000,25
-WA,Western Australia,Soccer,46,150000,18
-WA,Western Australia,Basketball,43,130000,16
-SA,South Australia,AFL,86,260000,42
-SA,South Australia,Cricket,54,120000,20
-SA,South Australia,Soccer,40,105000,17
-SA,South Australia,Basketball,39,95000,15
-TAS,Tasmania,AFL,78,95000,43
-TAS,Tasmania,Cricket,42,38000,17
-TAS,Tasmania,Soccer,35,33000,15
-TAS,Tasmania,Netball,46,55000,25
-ACT,Australian Capital Territory,Rugby Union,70,42000,25
-ACT,Australian Capital Territory,Soccer,64,50000,30
-ACT,Australian Capital Territory,AFL,52,31000,19
-ACT,Australian Capital Territory,Basketball,45,26000,16
-NT,Northern Territory,AFL,74,28000,35
-NT,Northern Territory,Rugby League,61,19000,24
-NT,Northern Territory,Basketball,43,13000,16
-NT,Northern Territory,Soccer,38,12000,15
+VIC,Victoria,AFL,92,185000,38.6
+VIC,Victoria,Soccer,66,128000,26.8
+VIC,Victoria,Cricket,58,98000,20.4
+VIC,Victoria,Basketball,49,68000,14.2
+NSW,New South Wales,Rugby League,88,168000,34.2
+NSW,New South Wales,Soccer,72,138000,28.1
+NSW,New South Wales,Cricket,55,85000,17.3
+NSW,New South Wales,Basketball,45,52000,10.6
+NSW,New South Wales,AFL,48,48000,9.8
+QLD,Queensland,Rugby League,90,142000,36.1
+QLD,Queensland,Soccer,62,98000,24.9
+QLD,Queensland,Cricket,57,72000,18.3
+QLD,Queensland,AFL,48,58000,14.7
+QLD,Queensland,Basketball,43,24000,6.1
+WA,Western Australia,AFL,83,92000,37.1
+WA,Western Australia,Cricket,61,58000,23.4
+WA,Western Australia,Soccer,46,42000,16.9
+WA,Western Australia,Basketball,43,28000,11.3
+WA,Western Australia,Netball,38,28000,11.3
+SA,South Australia,AFL,86,78000,42.6
+SA,South Australia,Cricket,54,32000,17.5
+SA,South Australia,Soccer,40,28000,15.3
+SA,South Australia,Netball,42,24000,13.1
+SA,South Australia,Basketball,39,21000,11.5
+TAS,Tasmania,AFL,78,28000,43.1
+TAS,Tasmania,Netball,46,12000,18.5
+TAS,Tasmania,Cricket,42,10000,15.4
+TAS,Tasmania,Soccer,35,8500,13.1
+TAS,Tasmania,Basketball,32,6500,10.0
+ACT,Australian Capital Territory,Rugby Union,70,12000,25.0
+ACT,Australian Capital Territory,Soccer,64,11000,22.9
+ACT,Australian Capital Territory,AFL,52,8500,17.7
+ACT,Australian Capital Territory,Basketball,45,7200,15.0
+ACT,Australian Capital Territory,Netball,48,9300,19.4
+NT,Northern Territory,AFL,74,8500,35.3
+NT,Northern Territory,Rugby League,61,6200,25.7
+NT,Northern Territory,Basketball,43,3800,15.8
+NT,Northern Territory,Soccer,38,3200,13.3
+NT,Northern Territory,Cricket,35,2400,10.0

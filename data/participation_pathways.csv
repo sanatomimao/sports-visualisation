@@ -1,14 +1,21 @@
 sport,entry_point,outcome,percent
-AFL,School sport,Local club,36
-AFL,Family influence,Local club,30
-AFL,Media exposure,Spectator only,22
-Soccer,School sport,Local club,42
-Soccer,Friends,Social league,31
-Soccer,Media exposure,Spectator only,18
-Cricket,Family influence,Local club,35
-Cricket,School sport,Local club,28
-Cricket,Media exposure,Spectator only,24
-Basketball,Friends,Social league,39
-Basketball,School sport,Local club,34
-Netball,School sport,Local club,46
-Netball,Friends,Social league,29
+AFL,School sport,Local club,36.0
+AFL,Family influence,Local club,30.0
+AFL,Media exposure,Spectator only,22.0
+AFL,School sport,Spectator only,12.0
+Soccer,School sport,Local club,42.0
+Soccer,Friends,Social league,31.0
+Soccer,Media exposure,Spectator only,18.0
+Soccer,School sport,Spectator only,9.0
+Cricket,Family influence,Local club,35.0
+Cricket,School sport,Local club,28.0
+Cricket,Media exposure,Spectator only,24.0
+Cricket,Friends,Social league,13.0
+Basketball,Friends,Social league,39.0
+Basketball,School sport,Local club,34.0
+Basketball,Media exposure,Spectator only,18.0
+Basketball,Family influence,Local club,9.0
+Netball,School sport,Local club,46.0
+Netball,Friends,Social league,29.0
+Netball,Family influence,Local club,18.0
+Netball,Media exposure,Spectator only,7.0
