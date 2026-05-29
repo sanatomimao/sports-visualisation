@@ -299,7 +299,18 @@ const heatmapFemale={$schema:"https://vega.github.io/schema/vega-lite/v5.json",
                    title:"Female Participation Rate (%)",width:"container",height:350,data:{url:"data/age_gender_sport_matrix.csv",format:{type:"csv"}},
                    mark:"rect",encoding:{x:{field:"age_group",type:"ordinal",title:"Age Group",sort:["5-14","15-24","25-34","35-44","45-54","55+"]},y:{field:"sport",type:"nominal",
                    title:"Sport",sort:["AFL","Cricket","Soccer","Basketball","Tennis","Netball","Rugby League"]},color:{field:"participation_index",type:"quantitative",title:"Rate (%)",scale:{scheme:"blues",domain:[0,90]}},tooltip:[{field:"sport",
-                   title:"Sport"},{field:"age_group",title:"Age Group"},{field:"participation_index",title:"Rate (%)",format:".1f"}]},config:CFG};
+                   title:"Sport"},{field:"age_group",title:"Age Group"},{field:"participation_index",title:"Rate (%)",format:".1f"}]},
+                   mark: { type: "rect", tooltip: true },
+                   layer: [
+                      { mark: "rect" },
+                      { mark: { type: "text", fontSize: 9, color: "white", align: "center", baseline: "middle" },
+                   encoding: { 
+                      text: { field: "participation_index", format: ".0f" },
+                      color: { value: "white" }
+                       }
+                    }
+                   ]              
+                   config:CFG};
 
 // 3. Gender Gap (Diverging Bar) - CUSTOM
 const genderGap={$schema:"https://vega.github.io/schema/vega-lite/v5.json",title:"Gender Participation Gap (Ages 5-14)",width:"container",height:350,data:{url:"data/age_gender_sport_matrix.csv",format:{type:"csv"}},transform:[{filter:"datum.age_group=='5-14'"},{calculate:"datum.gender=='Male' ? datum.participation_index : -datum.participation_index",as:"signed_value"}],mark:"bar",encoding:{y:{field:"sport",type:"nominal",title:"Sport",sort:["Netball","Tennis","Cricket","Rugby League","Basketball","AFL","Soccer"]},x:{field:"signed_value",type:"quantitative",title:"Participation Rate (%)",axis:{grid:true,format:"d"}},color:{field:"gender",type:"nominal",title:"Gender",scale:{domain:["Male","Female"],range:["#3498DB","#E74C3C"]}},tooltip:[{field:"sport",title:"Sport"},{field:"gender",title:"Gender"},{field:"participation_index",title:"Rate (%)",format:".1f"}]},config:CFG};
@@ -315,8 +326,8 @@ const groupedBar={$schema:"https://vega.github.io/schema/vega-lite/v5.json",
                   title:"Gender"},{field:"participation_index",title:"Rate (%)",format:".1f"}]},config:CFG};
 
 // 5. Choropleth Map with REAL GeoJSON URL
-const choroplethMap={$schema:"https://vega.github.io/schema/vega-lite/v5.json",title:"Dominant Sport by State",width:"container",height:450,
-                     projection:{type:"mercator",center:[134,-28],scale:450},
+const choroplethMap={$schema:"https://vega.github.io/schema/vega-lite/v5.json",title:"Dominant Sport by State",width:"container",height:600,
+                     projection:{type:"mercator",center:[134,-28],scale:600},
                      data:{url:"https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
                      format:{type:"json",property:"features"}},transform:[{lookup:"properties.STATE_NAME",
                      from:{data:{url:"data/dominant_sport_by_state.csv",format:{type:"csv"}},key:"state",fields:["sport","participants","popularity_index"]}},{calculate:"datum.sport==null?'No Data':datum.sport",as:"sport_display"}],mark:{type:"geoshape",stroke:"white",strokeWidth:1.5},encoding:{color:{field:"sport_display",type:"nominal",title:"Dominant Sport",scale:{domain:["AFL","Rugby League","Rugby Union","No Data"],range:["#D32F2F","#388E3C","#1976D2","#CCCCCC"]},legend:{orient:"bottom",titleFontSize:12}},tooltip:[{field:"properties.STATE_NAME",type:"nominal",title:"State"},{field:"sport_display",type:"nominal",title:"Dominant Sport"},{field:"participants",type:"quantitative",title:"Participants",format:","},{field:"popularity_index",type:"quantitative",title:"Popularity Index"}]},config:{view:{stroke:null}}};
