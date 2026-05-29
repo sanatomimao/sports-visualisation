@@ -657,7 +657,7 @@
         //projection: { type: "mercator", center: [134, -28], scale: 450 },
         projection: { type: "albers", center: [134, -28], parallels: [-18, -36], scale: 500 },
         //data: { url: "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json", format: { type: "json", property: "features" } },
-        data: { url: "data/australian-states.json",  format: { type: "json", property: "features" }}
+        data: { url: "data/australian-states.geojson",  format: { type: "geojson", property: "features" }}
         transform: [{
             lookup: "properties.STATE_NAME",
             from: { data: { url: "data/dominant_sport_by_state.csv", format: { type: "csv" } }, key: "state", fields: ["sport", "participants", "popularity_index"] }
