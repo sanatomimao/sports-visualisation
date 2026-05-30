@@ -497,9 +497,9 @@
         width: "container", height: 450,
         //projection: { type: "mercator", center: [134, -28], scale: 500 },
         projection: { type: "albers", rotate: [-133, 0, 0], center: [0, -25], parallels: [-18, -36], scale: 450},
-        data: { url: "./data/au-state.json", format: { type: "json", property: "features" } },
+        //data: { url: "./data/au-state.json", format: { type: "json", property: "features" } },
         //data: { url: "./data/australia-states.geojson", format: { type: "geojson", property: "features" } },
-        //data: { url: "./data/states.geojson", format: { type: "geojson", property: "features" } },
+        data: { url: "./data/states.geojson", format: { type: "geojson", property: "features" } },
         transform: [{
             lookup: "properties.STATE_NAME",
             from: { data: { url: "./data/dominant_sport_by_state.csv", format: { type: "csv" } }, key: "state", fields: ["sport", "participants"] }
