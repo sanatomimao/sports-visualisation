@@ -1,85 +1,85 @@
 sport,age_group,gender,participation_index
-AFL,5-14,Female,71.4
-AFL,5-14,Male,80.6
-AFL,15-24,Female,63.9
-AFL,15-24,Male,72.1
-AFL,25-34,Female,47.0
-AFL,25-34,Male,53.0
-AFL,35-44,Female,35.7
-AFL,35-44,Male,40.3
-AFL,45-54,Female,26.3
-AFL,45-54,Male,29.7
-AFL,55+,Female,15.0
-AFL,55+,Male,17.0
-Cricket,5-14,Female,57.3
-Cricket,5-14,Male,64.7
-Cricket,15-24,Female,50.8
-Cricket,15-24,Male,57.2
-Cricket,25-34,Female,40.4
-Cricket,25-34,Male,45.6
-Cricket,35-44,Female,32.9
-Cricket,35-44,Male,37.1
-Cricket,45-54,Female,23.5
-Cricket,45-54,Male,26.5
-Cricket,55+,Female,13.2
-Cricket,55+,Male,14.8
-Soccer,5-14,Female,77.1
-Soccer,5-14,Male,86.9
-Soccer,15-24,Female,65.8
-Soccer,15-24,Male,74.2
-Soccer,25-34,Female,45.1
-Soccer,25-34,Male,50.9
-Soccer,35-44,Female,28.2
-Soccer,35-44,Male,31.8
-Soccer,45-54,Female,16.9
-Soccer,45-54,Male,19.1
-Soccer,55+,Female,8.5
-Soccer,55+,Male,9.5
-Basketball,5-14,Female,69.6
-Basketball,5-14,Male,78.4
-Basketball,15-24,Female,60.2
-Basketball,15-24,Male,67.8
-Basketball,25-34,Female,36.7
-Basketball,25-34,Male,41.3
-Basketball,35-44,Female,20.7
-Basketball,35-44,Male,23.3
-Basketball,45-54,Female,11.3
-Basketball,45-54,Male,12.7
-Basketball,55+,Female,5.6
-Basketball,55+,Male,6.4
-Tennis,5-14,Female,43.7
-Tennis,5-14,Male,40.3
-Tennis,15-24,Female,48.3
-Tennis,15-24,Male,44.5
-Tennis,25-34,Female,41.4
-Tennis,25-34,Male,38.2
-Tennis,35-44,Female,37.9
-Tennis,35-44,Male,35.0
-Tennis,45-54,Female,35.6
-Tennis,45-54,Male,32.9
-Tennis,55+,Female,27.6
-Tennis,55+,Male,25.4
-Netball,5-14,Female,79.3
-Netball,5-14,Male,38.0
-Netball,15-24,Female,66.7
-Netball,15-24,Male,31.9
-Netball,25-34,Female,47.1
-Netball,25-34,Male,22.6
-Netball,35-44,Female,33.3
-Netball,35-44,Male,16.0
-Netball,45-54,Female,20.7
-Netball,45-54,Male,9.9
-Netball,55+,Female,11.5
-Netball,55+,Male,5.5
-Rugby League,5-14,Female,54.5
-Rugby League,5-14,Male,61.5
-Rugby League,15-24,Female,49.8
-Rugby League,15-24,Male,56.2
-Rugby League,25-34,Female,36.7
-Rugby League,25-34,Male,41.3
-Rugby League,35-44,Female,23.5
-Rugby League,35-44,Male,26.5
-Rugby League,45-54,Female,14.1
-Rugby League,45-54,Male,15.9
-Rugby League,55+,Female,5.6
-Rugby League,55+,Male,6.4
+AFL,5-14,Male,22.5
+AFL,15-24,Male,18.3
+AFL,25-34,Male,12.1
+AFL,35-44,Male,8.5
+AFL,45-54,Male,5.2
+AFL,55+,Male,2.8
+AFL,5-14,Female,14.2
+AFL,15-24,Female,9.8
+AFL,25-34,Female,5.3
+AFL,35-44,Female,3.1
+AFL,45-54,Female,1.8
+AFL,55+,Female,0.9
+Cricket,5-14,Male,15.8
+Cricket,15-24,Male,12.4
+Cricket,25-34,Male,8.9
+Cricket,35-44,Male,6.2
+Cricket,45-54,Male,4.1
+Cricket,55+,Male,2.5
+Cricket,5-14,Female,8.3
+Cricket,15-24,Female,5.1
+Cricket,25-34,Female,2.8
+Cricket,35-44,Female,1.9
+Cricket,45-54,Female,1.2
+Cricket,55+,Female,0.6
+Soccer,5-14,Male,19.6
+Soccer,15-24,Male,15.2
+Soccer,25-34,Male,10.8
+Soccer,35-44,Male,6.5
+Soccer,45-54,Male,3.8
+Soccer,55+,Male,1.9
+Soccer,5-14,Female,16.3
+Soccer,15-24,Female,11.7
+Soccer,25-34,Female,6.2
+Soccer,35-44,Female,3.4
+Soccer,45-54,Female,1.8
+Soccer,55+,Female,0.8
+Basketball,5-14,Male,12.4
+Basketball,15-24,Male,9.8
+Basketball,25-34,Male,5.6
+Basketball,35-44,Male,3.2
+Basketball,45-54,Male,1.8
+Basketball,55+,Male,0.9
+Basketball,5-14,Female,10.1
+Basketball,15-24,Female,7.3
+Basketball,25-34,Female,3.8
+Basketball,35-44,Female,2.1
+Basketball,45-54,Female,1.1
+Basketball,55+,Female,0.5
+Tennis,5-14,Male,8.2
+Tennis,15-24,Male,6.5
+Tennis,25-34,Male,5.1
+Tennis,35-44,Male,4.3
+Tennis,45-54,Male,3.6
+Tennis,55+,Male,2.8
+Tennis,5-14,Female,7.8
+Tennis,15-24,Female,6.8
+Tennis,25-34,Female,5.4
+Tennis,35-44,Female,4.6
+Tennis,45-54,Female,3.9
+Tennis,55+,Female,3.1
+Netball,5-14,Male,3.2
+Netball,15-24,Male,1.5
+Netball,25-34,Male,0.8
+Netball,35-44,Male,0.4
+Netball,45-54,Male,0.2
+Netball,55+,Male,0.1
+Netball,5-14,Female,18.5
+Netball,15-24,Female,14.2
+Netball,25-34,Female,8.6
+Netball,35-44,Female,5.2
+Netball,45-54,Female,2.8
+Netball,55+,Female,1.4
+Rugby League,5-14,Male,9.8
+Rugby League,15-24,Male,8.2
+Rugby League,25-34,Male,5.4
+Rugby League,35-44,Male,3.1
+Rugby League,45-54,Male,1.6
+Rugby League,55+,Male,0.7
+Rugby League,5-14,Female,4.2
+Rugby League,15-24,Female,3.1
+Rugby League,25-34,Female,1.8
+Rugby League,35-44,Female,0.9
+Rugby League,45-54,Female,0.4
+Rugby League,55+,Female,0.2
